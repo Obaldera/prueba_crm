@@ -114,11 +114,14 @@ class inicio(formatos_validar):
         conn = sql.connect("databases/WS_GYMDB.db")
         cur = conn.cursor()
         cur.execute(f"SELECT USER.ID_USER FROM USER WHERE NAME_USER = '{us}' and PASSWORD = '{ps}'")
-        id_user = cur.fetchall()
+        id_user = cur.fetchone()  # Obtiene solo un resultado
         conn.close()
-        i = id_user[0]
 
-        return i[0]
+        if id_user:  # Verifica que no sea None
+        return id_user[0]
+        else:
+        return None  # O un valor predeterminado si lo necesitas
+
 
 class registro(formatos_validar):
     
